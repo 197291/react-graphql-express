@@ -16,6 +16,10 @@ const configs = {
   production: {
     port: process.env.API_PORT_PRODUCTION || 7071,
     origin: process.env.ORIGIN || 'http://localhost:3001',
+    jwtOptions: {
+      secret: process.env.SECRET || 'jdhfj4hr734wefhdcui49fwehc93824yhc9euic',
+      exp: process.env.EXP || 36000
+    }
   },
   development: {
     env,
@@ -27,6 +31,10 @@ const configs = {
       uri: process.env.DB_URI,
       user: process.env.DB_USER,
       pass: process.env.DB_PASS,
+    },
+    jwtOptions: {
+      secret: process.env.SECRET || 'jdhfj4hr734wefhdcui49fwehc93824yhc9euic',
+      exp: process.env.EXP || 36000
     }
   },
   test: {

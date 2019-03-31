@@ -19,6 +19,10 @@ const typeDefs = `
     favorites: [Recipe]
   }
 
+  type Token {
+    token: String!
+  }
+
   type Query {
     getAllRecipes: [Recipe]
   }
@@ -28,6 +32,8 @@ const typeDefs = `
       name: String!, category: String!, description: String!,
       instructions: String!, username: String
     ): Recipe
+
+    signupUser(username: String!, email: String!, password: String!): Token
   }
 `;
 
