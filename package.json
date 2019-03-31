@@ -1,0 +1,36 @@
+{
+  "name": "react-graphql-recipes",
+  "version": "1.0.0",
+  "description": "A starter for React-Apollo-GraphQL projects",
+  "main": "server.js",
+  "scripts": {
+    "server": "nodemon --exec babel-node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently --names \"server,client\" \"npm run server --silent\" \"npm run client --silent\""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/runtime": "^7.4.2",
+    "apollo-server-express": "^1.4.0",
+    "babel-plugin-import-graphql": "^2.7.0",
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "cors": "^2.8.5",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "graphql": "^0.13.2",
+    "graphql-tools": "^3.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.20"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
+    "nodemon": "^1.17.5"
+  }
+}
