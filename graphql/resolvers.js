@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-import jwtOptions from '../config/environment';
+import { jwtOptions } from '../config/environment';
 
 const createToken = (user, secret, expiresIn) => {
   const { username, email} = user;
