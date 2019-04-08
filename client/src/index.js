@@ -1,19 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import config from './config';
-
 import './index.css';
+import client from './queries/client';
 import App from './components/App';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
-
-const client = new ApolloClient({
-  uri: `${config.HOST}:${config.PORT}${config.GRAPHQL_ENDPOINT}`
-})
 
 const Root = () => (
   <Router>

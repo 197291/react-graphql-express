@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
 import { makeExecutableSchema } from 'graphql-tools';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import cors from 'cors';
@@ -10,7 +11,7 @@ import typeDefs from '../graphql/schema';
 import Recipe from '../models/Recipe';
 import User from '../models/User';
 
-import { origin } from './environment';
+import { origin, jwtOptions } from './environment';
 
 const app = express();
 
@@ -29,17 +30,33 @@ const corsConfig = {
 
 app.use(cors(corsConfig));
 
+app.use(async (req, res, next) => {
+  const token = req.headers['authorization'];
+  console.log('====token', token);
+  if (token !== 'null') {
+    try {
+      const currentUser = await jwt.verify(token, jwtOptions.secret);
+      console.log(currentUser);
+      req._currentUser = currentUser;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  next();
+});
+
 // Connect schemas with GraphQl
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress({
+  graphqlExpress(({ _currentUser }) => ({
     schema,
     context: {
       Recipe,
-      User
+      User,
+      currentUser: _currentUser
     }
-  })
+  }))
 );
 
 export default app;

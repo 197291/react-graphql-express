@@ -33,6 +33,7 @@ const typeDefs = `
       instructions: String!, username: String
     ): Recipe
 
+    signinUser(username: String!, password: String!): Token
     signupUser(username: String!, email: String!, password: String!): Token
   }
 `;

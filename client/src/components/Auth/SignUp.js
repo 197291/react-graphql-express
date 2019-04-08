@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 
 import { SIGNUP_USER } from '../../queries';
+import Error from '../Error';
 
 import './signUp.css';
+import { saveToken } from '../../helpers';
 
 class SignUp extends Component {
 
@@ -32,9 +34,20 @@ class SignUp extends Component {
 
   handleSubmit = (e, signupUser) => {
     e.preventDefault();
-    this.cleanInputValues();
-    signupUser()
-      .then(data => console.log(data));
+    if (!this.formIsInvalid) {
+      signupUser()
+        .then( (data) => {
+          saveToken(data.signunUser.token);
+          this.cleanInputValues();
+        });
+    }
+  }
+
+  get formIsInvalid() {
+    const { username, password, passwordConfirmation, email } = this.state;
+    const isInvalid =
+    !username || !password || !email || !passwordConfirmation || (password && password !== passwordConfirmation);
+    return isInvalid;
   }
 
   render() {
@@ -72,10 +85,11 @@ class SignUp extends Component {
                 type="password"
                 name="passwordConfirmation"
                 placeholder="Confirm password"
-                passwordConfirmation={passwordConfirmation}
+                value={passwordConfirmation}
                 onChange={this.handleOnChange}
               />
               <button className="button-primary" type="submit" >Submit</button>
+              {error && <Error error={error} />}
             </form>
             )}
           }
