@@ -32,11 +32,9 @@ app.use(cors(corsConfig));
 
 app.use(async (req, res, next) => {
   const token = req.headers['authorization'];
-  console.log('====token', token);
   if (token !== 'null') {
     try {
       const currentUser = await jwt.verify(token, jwtOptions.secret);
-      console.log(currentUser);
       req._currentUser = currentUser;
     } catch (error) {
       console.error(error);

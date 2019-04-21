@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 import { SIGNIN_USER } from '../../queries';
 import Error from '../Error';
@@ -32,9 +33,12 @@ class SignIn extends Component {
     e.preventDefault();
     if (!this.formIsInvalid) {
       signinUser()
-        .then(({ data } ) => {
+        .then( async ({ data } ) => {
           saveToken(data.signinUser.token);
+          console.log('===sign-in====', data);
+          await this.props.refetch();
           this.cleanInputValues();
+          this.props.history.push('/');
         });
     }
   }
@@ -78,4 +82,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

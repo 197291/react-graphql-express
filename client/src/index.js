@@ -8,21 +8,34 @@ import client from './queries/client';
 import App from './components/App';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
+import Navbar from './components/Navbar';
+import withSession from './components/withSession';
+import Search from './components/Search';
+import Profile from './components/Profile';
+import AddRecipe from './components/AddRecipe';
 
-const Root = () => (
+import Routes from './routes';
+
+const Root = ({ refetch, session }) => (
   <Router>
+    <Navbar session={session} />
     <Switch>
-      <Route path='/' exact component={App} />
-      <Route path='/signin' component={SignIn} />
-      <Route path='/signup' component={SignUp} />
-      <Redirect to="" />
+      <Route path={Routes.Home} exact component={App} />
+      <Route path={Routes.SignIn} render={() => <SignIn refetch={refetch} />} />
+      <Route path={Routes.SignUp} render={() => <SignUp refetch={refetch} />} />
+      <Route path={Routes.Search} render={() => <Search refetch={refetch} />} />
+      <Route path={Routes.Profile} render={() => <Profile refetch={refetch} />} />
+      <Route path={Routes.AddRecipe} render={() => <AddRecipe refetch={refetch} />} />
+      <Redirect to={Routes.SignIn} />
     </Switch>
   </Router>
 );
 
+const RootWithSession = withSession(Root);
+
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <Root />
+    <RootWithSession />
   </ApolloProvider>,
   document.getElementById('root')
 );
