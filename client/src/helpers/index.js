@@ -9,3 +9,7 @@ export const getToken = () => {
 export const removeToken = () => {
   return localStorage.removeItem('token');
 }
+
+export const defaultValidation = (obj) => {
+  return Object.values(obj).some(field => !field)
+}

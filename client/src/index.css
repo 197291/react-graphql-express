@@ -65,3 +65,10 @@ nav ul li a {
 nav ul li .active {
   font-weight: bold;
 }
+
+button[disabled], button.button-primary[disabled] {
+  background:#ccc;
+  border-color: #ccc;
+  text-shadow:none;
+}
+
