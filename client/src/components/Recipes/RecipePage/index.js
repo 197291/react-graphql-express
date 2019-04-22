@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-import { GET_RECIPE } from '../../queries';
+import { GET_RECIPE } from '../../../queries';
 
 const RecipePage = ({ match }) => {
   const {_id } = match.params;
@@ -25,6 +25,7 @@ const RecipePage = ({ match }) => {
           <p>Instructions: {instructions}</p>
           <p>Likes: {likes}</p>
           <p>Created By: {username || 'Anonymous'}</p>
+          <button>Like</button>
         </div>
       );
       }

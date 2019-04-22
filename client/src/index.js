@@ -12,8 +12,8 @@ import Navbar from './components/Navbar';
 import withSession from './components/withSession';
 import Search from './components/Search';
 import Profile from './components/Profile';
-import AddRecipe from './components/AddRecipe';
-import RecipePage from './components/RecipePage';
+import AddRecipe from './components/Recipes/AddRecipe';
+import RecipePage from './components/Recipes/RecipePage';
 
 import Routes from './routes';
 
@@ -26,8 +26,8 @@ const Root = ({ refetch, session }) => (
       <Route path={Routes.SignUp} render={() => <SignUp refetch={refetch} />} />
       <Route path={Routes.Search} render={() => <Search refetch={refetch} />} />
       <Route path={Routes.Profile} render={() => <Profile refetch={refetch} />} />
-      <Route path={Routes.AddRecipe} render={() => <AddRecipe refetch={refetch} />} />
-      <Route path={Routes.RecipePage} render={() => <RecipePage refetch={refetch} />} />
+      <Route path={Routes.AddRecipe} render={() => <AddRecipe session={session} />} />
+      <Route path={Routes.RecipePage} component={RecipePage} />
       <Redirect to={Routes.SignIn} />
     </Switch>
   </Router>

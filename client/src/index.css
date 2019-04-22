@@ -13,9 +13,25 @@ code {
     monospace;
 }
 
+.form {
+  max-width: 600px;
+  width: 100%;
+}
+input, textarea {
+  width: 100%;
+}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
+}
+
+.center {
+  margin: auto;
+}
+
+.flex-columns {
+  flex-direction: column;
 }
 
 h1, h2, h3, h4 {

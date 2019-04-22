@@ -4,7 +4,7 @@ import { Query } from 'react-apollo';
 import { GET_ALL_RECIPES } from '../../queries';
 
 import './index.css';
-import RecipeItem from '../RecipeItem';
+import RecipeItem from '../Recipes/RecipeItem';
 
 class App extends Component {
 
