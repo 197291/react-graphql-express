@@ -13,6 +13,7 @@ import withSession from './components/withSession';
 import Search from './components/Search';
 import Profile from './components/Profile';
 import AddRecipe from './components/AddRecipe';
+import RecipePage from './components/RecipePage';
 
 import Routes from './routes';
 
@@ -26,6 +27,7 @@ const Root = ({ refetch, session }) => (
       <Route path={Routes.Search} render={() => <Search refetch={refetch} />} />
       <Route path={Routes.Profile} render={() => <Profile refetch={refetch} />} />
       <Route path={Routes.AddRecipe} render={() => <AddRecipe refetch={refetch} />} />
+      <Route path={Routes.RecipePage} render={() => <RecipePage refetch={refetch} />} />
       <Redirect to={Routes.SignIn} />
     </Switch>
   </Router>

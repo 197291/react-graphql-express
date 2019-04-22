@@ -5,5 +5,6 @@ const Routes = {
   Search: '/search',
   Profile: '/profile',
   AddRecipe: '/recipe/add',
+  RecipePage: '/recipes/:_id',
 };
 export default Routes;
