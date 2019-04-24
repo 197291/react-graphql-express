@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 
 import { GET_ALL_RECIPES } from '../../queries';
 
-import './index.css';
+import './index.scss';
 import RecipeItem from '../Recipes/RecipeItem';
 
 class App extends Component {
@@ -11,9 +11,7 @@ class App extends Component {
   getRecipes(recipes) {
     return recipes.map(recipe => {
       return (
-        <li key={recipe._id}>
-          <RecipeItem recipe={recipe} />
-        </li>
+          <RecipeItem key={recipe._id} recipe={recipe} />
       )
     })
   }
@@ -25,7 +23,7 @@ class App extends Component {
         <Query query={GET_ALL_RECIPES}>
         {({ data, loading, error }) => {
           return (
-            <div className="container flex">
+            <div className="container flex recipe-container">
             { !loading && data ? this.getRecipes(data.getAllRecipes) : 'Loading...' }
             </div>
           )

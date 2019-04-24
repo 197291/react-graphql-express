@@ -1,9 +1,10 @@
 import React from 'react';
 import { Mutation } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 import Error from '../../Error';
 import { defaultValidation } from '../../../helpers';
-import { ADD_RECIPE } from '../../../queries';
+import { ADD_RECIPE, GET_ALL_RECIPES } from '../../../queries';
 
 class AddRecipe extends React.Component {
 
@@ -27,26 +28,25 @@ class AddRecipe extends React.Component {
     });
   }
 
-  setDefaultState = () => {
-    const { session } = this.props;
-    this.setState({
-      name: '',
-      category: 'Breakfast',
-      instructions: '',
-      description: '',
-      username: session ? session.getCurrentUser.username : 'Anonymous'
-    })
-  }
-
   handleSubmit(e, addRecipe) {
     e.preventDefault();
-    addRecipe().then((data) => {
-      this.setDefaultState();
+    addRecipe().then(() => {
+      this.props.history.push('/');
     })
   }
 
   get isInvalidForm() {
     return defaultValidation(this.state)
+  }
+
+  updateCache = (cache, { data: { addRecipe } } ) => {
+    const { getAllRecipes } = cache.readQuery({ query : GET_ALL_RECIPES });
+    cache.writeQuery({
+      query: GET_ALL_RECIPES,
+      data: {
+        getAllRecipes: [addRecipe, ...getAllRecipes]
+      }
+    })
   }
 
   render() {
@@ -55,6 +55,7 @@ class AddRecipe extends React.Component {
       <Mutation
         mutation={ADD_RECIPE}
         variables={{ name, category, description, instructions, username}}
+        update={this.updateCache}
       >
         {
           (addRecipe, {data, loading, error} ) => {
@@ -108,4 +109,4 @@ class AddRecipe extends React.Component {
   }
 };
 
-export default AddRecipe;
+export default withRouter(AddRecipe);
