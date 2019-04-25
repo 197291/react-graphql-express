@@ -32,4 +32,35 @@ const RecipeSchema = new Schema({
   }
 });
 
-export default mongoose.model('Recipe', RecipeSchema);
+RecipeSchema.index({
+  '$**': 'text',
+});
+
+const Recipe = mongoose.model('Recipe', RecipeSchema);
+
+// PostSchema.statics = {
+//   searchPartial: function(q, callback) {
+//       return this.find({
+//           $or: [
+//               { "title": new RegExp(q, "gi") },
+//               { "body": new RegExp(q, "gi") },
+//           ]
+//       }, callback);
+//   },
+
+//   searchFull: function (q, callback) {
+//       return this.find({
+//           $text: { $search: q, $caseSensitive: false }
+//       }, callback)
+//   },
+
+//   search: function(q, callback) {
+//       this.searchFull(q, (err, data) => {
+//           if (err) return callback(err, data);
+//           if (!err && data.length) return callback(err, data);
+//           if (!err && data.length === 0) return this.searchPartial(q, callback);
+//       });
+//   },
+// }
+
+export default Recipe;

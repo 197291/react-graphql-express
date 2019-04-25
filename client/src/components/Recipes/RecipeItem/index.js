@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './index.scss';
 
-const RecipeItem = ({ recipe }) => (
+const RecipeItem = ({ recipe, withLikes }) => (
   <div className="RecipeItem">
   <Link to={`/recipes/${recipe._id}`}>
     <h4>
@@ -15,6 +15,7 @@ const RecipeItem = ({ recipe }) => (
         {recipe.category}
       </strong>
     </p>
+    { withLikes && <p>Likes: {recipe.likes}</p>}
   </div>
 );
 
