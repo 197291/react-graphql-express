@@ -48,6 +48,10 @@ export const GET_CURRENT_USER = gql`
       joinDate
       email
       username
+      favorites {
+        _id
+        name
+      }
     }
   }
 `;
