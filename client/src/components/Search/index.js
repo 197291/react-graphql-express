@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ApolloConsumer } from 'react-apollo';
+import { debounce } from 'lodash';
 
 import Error from '../Error';
 import RecipeItem from '../Recipes/RecipeItem';
@@ -11,11 +12,10 @@ function Search() {
   const [ error, setError ] = useState(null);
 
   function createRecipeItems() {
-    return recipes.map(recipe => <RecipeItem key={recipe._id} recipe={recipe} />)
+    return recipes.map(recipe => <RecipeItem withLikes={true} key={recipe._id} recipe={recipe} />)
   }
 
-  const handleChange = async (e, client) => {
-    e.persist();
+  const searchRecipesDebounced = debounce(async (e, client) => {
     try {
       const { data } = await client.query({
         query: SEARCH_RECIPES,
@@ -24,10 +24,15 @@ function Search() {
         }
       });
       setListRecipes(data.searchRecipes || []);
-    } catch(err) {
-      console.error('===ERROR-SEARCH===', err);
-      setError(err);
+    } catch (error) {
+      console.error('===ERROR-SEARCH===', error);
+      setError(error);
     }
+  }, 300);
+
+  const handleChange = async (e, client) => {
+    e.persist();
+    searchRecipesDebounced(e, client);
   }
 
     return (
@@ -35,7 +40,6 @@ function Search() {
         <ApolloConsumer>
           {
             (client) => {
-
               return(
                 <>
                   <input
@@ -46,7 +50,7 @@ function Search() {
                     id="search-input"
                     onChange={(e) => handleChange(e, client)}
                   />
-                  <div>
+                  <div className="flex">
                     {createRecipeItems()}
                   </div>
                   { error && <Error error={error} /> }
