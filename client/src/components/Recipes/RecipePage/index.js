@@ -11,7 +11,7 @@ const RecipePage = ({ match }) => {
     <Query variables={{_id}} query={GET_RECIPE}>
     {
       ({ data, loading, error}) => {
-      if (loading) return <div>Loading...</div>
+      if (loading) return <div className="container">Loading...</div>
       if (error) {
         console.error(error);
         return <div>Error...</div>
@@ -20,11 +20,11 @@ const RecipePage = ({ match }) => {
       return (
         <div className="RecipePage container">
           <h2>{name}</h2>
-          <p>Category: {category}</p>
-          <p>Description: {description}</p>
-          <p>Instructions: {instructions}</p>
-          <p>Likes: {likes}</p>
-          <p>Created By: {username || 'Anonymous'}</p>
+          <p><strong>Category:</strong> {category}</p>
+          <p><strong>Description:</strong> {description}</p>
+          <p><strong>Instructions:</strong> {instructions}</p>
+          <p><strong>Likes:</strong> {likes}</p>
+          <p><strong>Created By:</strong> {username || 'Anonymous'}</p>
           <button>Like</button>
         </div>
       );
