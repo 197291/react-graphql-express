@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Error from '../../Error';
 import { defaultValidation } from '../../../helpers';
 import { ADD_RECIPE, GET_ALL_RECIPES } from '../../../queries';
+import withAuth from '../../HOC/withAuth';
 
 class AddRecipe extends React.Component {
 
@@ -109,4 +110,4 @@ class AddRecipe extends React.Component {
   }
 };
 
-export default withRouter(AddRecipe);
+export default withAuth(((session) => session && session.getCurrentUser))(withRouter(AddRecipe));

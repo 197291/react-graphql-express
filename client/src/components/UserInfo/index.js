@@ -1,14 +1,23 @@
 import React from 'react';
 
-import './index.scss';
 import { Link } from 'react-router-dom';
+import { defaultLocalDate, defaultLocalTime } from '../../helpers';
+
+import './index.scss';
+
+const formatDate = (d) => {
+  const date = defaultLocalDate(d);
+  const time = defaultLocalTime(d);
+  return `${date} at ${time}`;
+}
 
 const UserInfo = ({ session: { getCurrentUser } }) => (
+
   <div className="UserInfo">
     <h3>User Info</h3>
     <p> <strong>Username: </strong> {getCurrentUser.username}</p>
     <p> <strong>Email: </strong> {getCurrentUser.email}</p>
-    <p> <strong>Join Date: </strong> {getCurrentUser.joinDate}</p>
+    <p> <strong>Join Date: </strong> {formatDate(getCurrentUser.joinDate)}</p>
     <h4>{getCurrentUser.username}'s Favorites</h4>
     <ul>
       {
