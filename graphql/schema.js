@@ -35,7 +35,7 @@ const typeDefs = `
       name: String!, category: String!, description: String!,
       instructions: String!, username: String
     ): Recipe
-
+    deleteUserRecipe(_id: ID!): Recipe
     signinUser(username: String!, password: String!): Token
     signupUser(username: String!, email: String!, password: String!): Token
   }

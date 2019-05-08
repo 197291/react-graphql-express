@@ -110,4 +110,4 @@ class AddRecipe extends React.Component {
   }
 };
 
-export default withAuth(((session) => session && session.getCurrentUser))(withRouter(AddRecipe));
+export default withAuth( session => session && session.getCurrentUser )(withRouter(AddRecipe));
