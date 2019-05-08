@@ -1,11 +1,13 @@
 import React from 'react';
 
 import UserInfo from '../UserInfo';
+import UserRecipes from '../UserRecipes';
 import withAuth from '../HOC/withAuth';
 
 const Profile = ({ session }) => (
   <div className="container">
     { session && <UserInfo session={session} /> }
+    { session && <UserRecipes session={session} /> }
   </div>
 );
 
