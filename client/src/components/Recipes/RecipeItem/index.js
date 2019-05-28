@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 
-import { DELETE_USER_RECIPE } from '../../../queries';
+import { DELETE_USER_RECIPE, GET_USER_RECIPES } from '../../../queries';
 
 import './index.scss';
 
@@ -14,7 +14,7 @@ const handleDelete = deleteUserReipe => {
   }
 }
 
-const RecipeItem = ({ recipe, withLikes }) => (
+const RecipeItem = ({ recipe, withLikes, username }) => (
   <div className="RecipeItem">
   <Link to={`/recipes/${recipe._id}`}>
     <h4>

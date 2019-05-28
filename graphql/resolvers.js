@@ -48,6 +48,12 @@ const resolvers = {
           model: 'Recipe'
         })
       return user;
+    },
+    getUserRecipes: async (root, { username }, { Recipe }) => {
+      if (!username) return null;
+
+      const userRecipes = await Recipe.find({username})
+      return userRecipes;
     }
   },
   Mutation: {
