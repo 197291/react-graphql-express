@@ -27,7 +27,7 @@ const RecipeItem = ({ recipe, withLikes, username }) => (
       </strong>
     </p>
     { withLikes && <p>Likes: {recipe.likes}</p>}
-    <Mutation
+    { username && <Mutation
       mutation={DELETE_USER_RECIPE}
       variables={{ _id: recipe._id}}
       update={ (cache, { data: { deleteUserRecipe } }) => {
@@ -57,7 +57,7 @@ const RecipeItem = ({ recipe, withLikes, username }) => (
         )
       }
 
-    </Mutation>
+    </Mutation>}
   </div>
 );
 

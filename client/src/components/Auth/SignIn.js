@@ -35,7 +35,6 @@ class SignIn extends Component {
       signinUser()
         .then( async ({ data } ) => {
           saveToken(data.signinUser.token);
-          console.log('===sign-in====', data);
           await this.props.refetch();
           this.cleanInputValues();
           this.props.history.push('/');

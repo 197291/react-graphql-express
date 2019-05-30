@@ -6,7 +6,7 @@ import RecipeItem from '../Recipes/RecipeItem';
 
 const UserRecipes = ({ session }) => {
   return (
-    <Query query={GET_USER_RECIPES} variables={ {username: session.getCurrentUser.username} }>
+    <Query fetchPolicy="cache-and-network" query={GET_USER_RECIPES} variables={ {username: session.getCurrentUser.username} }>
     {
       ({ data, loading, error }) => {
         if (loading) return <div>Loading...</div>

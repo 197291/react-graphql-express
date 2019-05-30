@@ -39,7 +39,7 @@ class SignUp extends Component {
       signupUser()
         .then( async (data) => {
           saveToken(data.signunUser.token);
-          console.log('===sign-up====', data);
+
           await this.props.refetch();
           this.cleanInputValues();
           this.props.history.push('/');
