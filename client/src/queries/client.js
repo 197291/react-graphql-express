@@ -7,7 +7,7 @@ const client = new ApolloClient({
   fetchOptions: {
     credentials: 'include'
   },
-  request: operation => {
+  request: (operation) => {
     const token = getToken();
     operation.setContext({
       headers: {
@@ -22,6 +22,6 @@ const client = new ApolloClient({
       }
     }
   }
-})
+});
 
 export default client;

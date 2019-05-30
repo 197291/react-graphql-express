@@ -67,6 +67,5 @@ export const GET_USER_RECIPES = gql`
       username
       createDate
     }
-
   }
 `;

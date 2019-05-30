@@ -7,13 +7,10 @@ import './index.scss';
 import RecipeItem from '../Recipes/RecipeItem';
 
 class App extends Component {
-
   getRecipes(recipes) {
-    return recipes.map(recipe => {
-      return (
-          <RecipeItem key={recipe._id} recipe={recipe} />
-      )
-    })
+    return recipes.map((recipe) => {
+      return <RecipeItem key={recipe._id} recipe={recipe} />;
+    });
   }
 
   render() {
@@ -21,13 +18,13 @@ class App extends Component {
       <div className="App">
         <h1>HOME</h1>
         <Query query={GET_ALL_RECIPES}>
-        {({ data, loading, error }) => {
-          return (
-            <div className="container flex recipe-container">
-            { !loading && data ? this.getRecipes(data.getAllRecipes) : 'Loading...' }
-            </div>
-          )
-        }}
+          {({ data, loading, error }) => {
+            return (
+              <div className="container flex recipe-container">
+                {!loading && data ? this.getRecipes(data.getAllRecipes) : 'Loading...'}
+              </div>
+            );
+          }}
         </Query>
       </div>
     );

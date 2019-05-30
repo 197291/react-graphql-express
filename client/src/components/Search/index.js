@@ -7,12 +7,13 @@ import RecipeItem from '../Recipes/RecipeItem';
 import { SEARCH_RECIPES } from '../../queries/queries';
 
 function Search() {
-
-  const [ recipes, setListRecipes ] = useState([]);
-  const [ error, setError ] = useState(null);
+  const [recipes, setListRecipes] = useState([]);
+  const [error, setError] = useState(null);
 
   function createRecipeItems() {
-    return recipes.map(recipe => <RecipeItem withLikes={true} key={recipe._id} recipe={recipe} />)
+    return recipes.map((recipe) => (
+      <RecipeItem withLikes={true} key={recipe._id} recipe={recipe} />
+    ));
   }
 
   const searchRecipesDebounced = debounce(async (e, client) => {
@@ -33,34 +34,30 @@ function Search() {
   const handleChange = async (e, client) => {
     e.persist();
     searchRecipesDebounced(e, client);
-  }
+  };
 
-    return (
-      <div className="container Search">
-        <ApolloConsumer>
-          {
-            (client) => {
-              return(
-                <>
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    className="u-full-width"
-                    name="search"
-                    id="search-input"
-                    onChange={(e) => handleChange(e, client)}
-                  />
-                  <div className="flex">
-                    {createRecipeItems()}
-                  </div>
-                  { error && <Error error={error} /> }
-                </>
-              );
-            }
-          }
-        </ApolloConsumer>
-      </div>
-    );
+  return (
+    <div className="container Search">
+      <ApolloConsumer>
+        {(client) => {
+          return (
+            <>
+              <input
+                type="text"
+                placeholder="Search..."
+                className="u-full-width"
+                name="search"
+                id="search-input"
+                onChange={(e) => handleChange(e, client)}
+              />
+              <div className="flex">{createRecipeItems()}</div>
+              {error && <Error error={error} />}
+            </>
+          );
+        }}
+      </ApolloConsumer>
+    </div>
+  );
 }
 
 export default Search;

@@ -9,38 +9,36 @@ import './signIn.css';
 import { saveToken } from '../../helpers';
 
 class SignIn extends Component {
-
   state = {
     username: '',
-    password: '',
-  }
+    password: ''
+  };
 
   handleOnChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
-  }
+  };
 
   cleanInputValues() {
     this.setState({
       username: '',
-      password: '',
+      password: ''
     });
   }
 
   handleSubmit = (e, signinUser) => {
     e.preventDefault();
     if (!this.formIsInvalid) {
-      signinUser()
-        .then( async ({ data } ) => {
-          saveToken(data.signinUser.token);
-          await this.props.refetch();
-          this.cleanInputValues();
-          this.props.history.push('/');
-        });
+      signinUser().then(async ({ data }) => {
+        saveToken(data.signinUser.token);
+        await this.props.refetch();
+        this.cleanInputValues();
+        this.props.history.push('/');
+      });
     }
-  }
+  };
 
   get formIsInvalid() {
     const { username, password } = this.state;
@@ -54,27 +52,31 @@ class SignIn extends Component {
         <h2 className="App">SignIn</h2>
         <Mutation mutation={SIGNIN_USER} variables={{ username, password }}>
           {(signinUser, { data, loading, error }) => {
-            return loading ? 'Loading...' : (
+            return loading ? (
+              'Loading...'
+            ) : (
               <form onSubmit={(e) => this.handleSubmit(e, signinUser)} className="form form-signin">
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={username}
-                onChange={this.handleOnChange}
-              />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={this.handleOnChange}
-              />
-              <button className="button-primary" type="submit" >Sign In</button>
-              {error && <Error error={error} />}
-            </form>
-            )}
-          }
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={this.handleOnChange}
+                />
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={this.handleOnChange}
+                />
+                <button className="button-primary" type="submit">
+                  Sign In
+                </button>
+                {error && <Error error={error} />}
+              </form>
+            );
+          }}
         </Mutation>
       </div>
     );

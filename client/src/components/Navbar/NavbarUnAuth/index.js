@@ -4,18 +4,24 @@ import { NavLink } from 'react-router-dom';
 import Routes from '../../../routes';
 
 const NavbarUnAuth = () => (
-  <ul >
+  <ul>
     <li>
-      <NavLink to={Routes.Home} exact>Home</NavLink>
+      <NavLink to={Routes.Home} exact>
+        Home
+      </NavLink>
     </li>
     <li>
       <NavLink to={Routes.Search}>Search</NavLink>
     </li>
     <li>
-      <NavLink to={Routes.SignIn} exact>Sign In</NavLink>
+      <NavLink to={Routes.SignIn} exact>
+        Sign In
+      </NavLink>
     </li>
     <li>
-      <NavLink to={Routes.SignUp} exact>Sign Up</NavLink>
+      <NavLink to={Routes.SignUp} exact>
+        Sign Up
+      </NavLink>
     </li>
   </ul>
 );

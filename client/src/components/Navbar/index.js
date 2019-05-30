@@ -5,13 +5,9 @@ import NavbarAuth from './NavbarAuth';
 
 const Navbar = ({ session }) => (
   <header>
-   <nav>
-     {
-      session && session.getCurrentUser
-        ? <NavbarAuth session={session} />
-        : <NavbarUnAuth />
-     }
-   </nav>
+    <nav>
+      {session && session.getCurrentUser ? <NavbarAuth session={session} /> : <NavbarUnAuth />}
+    </nav>
   </header>
 );
 

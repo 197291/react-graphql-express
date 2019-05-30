@@ -12,9 +12,7 @@ function handleSignout(history, client) {
 
 const SignOut = ({ history }) => (
   <ApolloConsumer>
-    { (client) => (
-      <button onClick={() => handleSignout(history, client)}>SIGNOUT</button>
-    )}
+    {(client) => <button onClick={() => handleSignout(history, client)}>SIGNOUT</button>}
   </ApolloConsumer>
 );
 
