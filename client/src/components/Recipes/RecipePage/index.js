@@ -13,7 +13,6 @@ const RecipePage = ({ match }) => {
       {({ data, loading, error }) => {
         if (loading) return <div className="container">Loading...</div>;
         if (error) {
-          console.error(error);
           return <div>Error...</div>;
         }
         const { name, category, description, instructions, likes, username } = data.getRecipe;

@@ -79,7 +79,6 @@ const resolvers = {
     },
     deleteUserRecipe: async (root, { _id }, { Recipe }) => {
       const recipe = await Recipe.findOneAndRemove({ _id });
-      console.log(recipe);
       return recipe;
     },
     signinUser: async (root, { username, password }, { User }) => {

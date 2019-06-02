@@ -2,9 +2,6 @@ import mongoose from 'mongoose';
 
 import config from './environment';
 
-import User from '../models/User';
-import Recipe from '../models/Recipe';
-
 mongoose
   .connect(config.db.uri)
   .then(() => {
@@ -12,4 +9,4 @@ mongoose
   })
   .catch((err) => {
     console.error('=====DATABASE CONNECTION ERROR=====', err);
-  })
+  });

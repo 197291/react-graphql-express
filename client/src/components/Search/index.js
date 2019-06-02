@@ -26,7 +26,6 @@ function Search() {
       });
       setListRecipes(data.searchRecipes || []);
     } catch (error) {
-      console.error('===ERROR-SEARCH===', error);
       setError(error);
     }
   }, 300);

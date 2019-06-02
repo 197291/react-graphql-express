@@ -28,7 +28,6 @@ const RecipeItem = ({ recipe, withLikes, username }) => (
         mutation={DELETE_USER_RECIPE}
         variables={{ _id: recipe._id }}
         update={(cache, { data: { deleteUserRecipe } }) => {
-          console.log(cache);
           const { getUserRecipes } = cache.readQuery({
             query: GET_USER_RECIPES,
             variables: { username }
