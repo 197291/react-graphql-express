@@ -14,7 +14,8 @@ class LikeRecipe extends React.Component {
   get prepareState() {
     let username = '';
     let liked = false;
-    const { _id, getCurrentUser } = this.props.session;
+    const { _id } = this.props;
+    const { getCurrentUser } = this.props.session;
     if (getCurrentUser) {
       username = getCurrentUser.username;
       liked = getCurrentUser.favorites.findIndex((f) => f._id === _id) > -1;
