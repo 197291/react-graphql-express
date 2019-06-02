@@ -72,6 +72,11 @@ const resolvers = {
       const recipe = await Recipe.findOneAndUpdate({ _id }, { $inc: { likes: 1 } });
       return recipe;
     },
+    unlikeRecipe: async (root, { _id, username }, { Recipe, User }) => {
+      await User.findOneAndUpdate({ username }, { $pull: { favorites: _id } });
+      const recipe = await Recipe.findOneAndUpdate({ _id }, { $inc: { likes: -1 } });
+      return recipe;
+    },
     deleteUserRecipe: async (root, { _id }, { Recipe }) => {
       const recipe = await Recipe.findOneAndRemove({ _id });
       console.log(recipe);

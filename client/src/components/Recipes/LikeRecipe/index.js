@@ -2,7 +2,7 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 
 import withSession from '../../HOC/withSession';
-import { LIKE_RECIPE } from '../../../queries/mutations';
+import { LIKE_RECIPE, UNLIKE_RECIPE } from '../../../queries/mutations';
 import { GET_RECIPE } from '../../../queries';
 
 class LikeRecipe extends React.Component {
@@ -26,28 +26,42 @@ class LikeRecipe extends React.Component {
     };
   }
 
-  handleClick = (likeRecipe) => {
+  handleClick = (likeRecipe, unlikeRecipe) => {
     this.setState(
       (prevState) => ({
         liked: !prevState.liked
       }),
       () => {
-        this.handleLike(likeRecipe);
+        this.handleLike(likeRecipe, unlikeRecipe);
       }
     );
   };
 
-  handleLike = (likeRecipe) => {
+  handleLike = (likeRecipe, unlikeRecipe) => {
     if (this.state.liked) {
       likeRecipe().then(async ({ data }) => {
         await this.props.refetch();
       });
     } else {
-      console.log('inlike mutation');
+      unlikeRecipe().then(async ({ data }) => {
+        await this.props.refetch();
+      });
     }
   };
 
-  updateLink = (cache, { data: { likeRecipe } }) => {
+  updateLike = (cache, { data: { likeRecipe } }) => {
+    const { _id } = this.props;
+    const { getRecipe } = cache.readQuery({ query: GET_RECIPE, variables: { _id } });
+    cache.writeQuery({
+      query: GET_RECIPE,
+      variables: { _id },
+      data: {
+        getRecipe: { ...getRecipe, likes: likeRecipe.likes + 1 }
+      }
+    });
+  };
+
+  updateUnlike = (cache, { data: { unlikeRecipe } }) => {
     const { _id } = this.props;
     const { getRecipe } = cache.readQuery({ query: GET_RECIPE, variables: { _id } });
 
@@ -55,7 +69,7 @@ class LikeRecipe extends React.Component {
       query: GET_RECIPE,
       variables: { _id },
       data: {
-        getRecipe: { ...getRecipe, likes: likeRecipe.likes + 1 }
+        getRecipe: { ...getRecipe, likes: unlikeRecipe.likes - 1 }
       }
     });
   };
@@ -66,27 +80,43 @@ class LikeRecipe extends React.Component {
 
     return (
       <Mutation
-        mutation={LIKE_RECIPE}
+        mutation={UNLIKE_RECIPE}
         variables={{ _id, username }}
-        update={this.updateLink}
+        update={this.updateUnlike}
         optimisticResponse={{
           __typename: 'Mutation',
-          likeRecipe: {
+          unlikeRecipe: {
             _id,
             __typename: 'Recipe',
             likes: likes
           }
         }}
       >
-        {(likeRecipe) => {
-          return (
-            username && (
-              <button onClick={() => this.handleClick(likeRecipe)}>
-                {liked ? 'Liked' : 'Like'}
-              </button>
-            )
-          );
-        }}
+        {(unlikeRecipe) => (
+          <Mutation
+            mutation={LIKE_RECIPE}
+            variables={{ _id, username }}
+            update={this.updateLike}
+            optimisticResponse={{
+              __typename: 'Mutation',
+              likeRecipe: {
+                _id,
+                __typename: 'Recipe',
+                likes: likes
+              }
+            }}
+          >
+            {(likeRecipe) => {
+              return (
+                username && (
+                  <button onClick={() => this.handleClick(likeRecipe, unlikeRecipe)}>
+                    {liked ? 'Unlike' : 'Like'}
+                  </button>
+                )
+              );
+            }}
+          </Mutation>
+        )}
       </Mutation>
     );
   }

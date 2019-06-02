@@ -38,6 +38,7 @@ const typeDefs = `
     ): Recipe
     deleteUserRecipe(_id: ID!): Recipe
     likeRecipe(_id: ID!, username: String!): Recipe
+    unlikeRecipe(_id: ID!, username: String!): Recipe
     signinUser(username: String!, password: String!): Token
     signupUser(username: String!, email: String!, password: String!): Token
   }

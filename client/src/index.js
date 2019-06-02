@@ -28,7 +28,7 @@ const Root = ({ refetch, session }) => (
       <Route path={Routes.Profile} render={() => <Profile session={session} />} />
       <Route path={Routes.AddRecipe} render={() => <AddRecipe session={session} />} />
       <Route path={Routes.RecipePage} component={RecipePage} />
-      <Redirect to={Routes.SignIn} />
+      <Redirect to={Routes.Home} />
     </Switch>
   </Router>
 );
