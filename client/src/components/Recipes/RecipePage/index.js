@@ -35,7 +35,7 @@ const RecipePage = ({ match }) => {
             <p>
               <strong>Created By:</strong> {username || 'Anonymous'}
             </p>
-            <LikeRecipe _id={_id} />
+            <LikeRecipe likes={likes} _id={_id} />
           </div>
         );
       }}
