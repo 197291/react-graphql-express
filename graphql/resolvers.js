@@ -4,14 +4,14 @@ import bcrypt from 'bcrypt';
 import { jwtOptions } from '../config/environment';
 
 const createToken = (user, secret, expiresIn) => {
-  const { username, email} = user;
+  const { username, email } = user;
   return jwt.sign({ username, email }, secret, { expiresIn });
-}
+};
 
 const resolvers = {
   Query: {
     getAllRecipes: async (root, args, { Recipe }) => {
-      const allRecipes = await Recipe.find().sort({ createdDate: 'desc'});
+      const allRecipes = await Recipe.find().sort({ createdDate: 'desc' });
       return allRecipes;
     },
     getRecipe: async (root, { _id }, { Recipe }) => {
@@ -27,42 +27,35 @@ const resolvers = {
           {
             score: { $meta: 'textScore' }
           }
-        )
-        .sort({ score: { $meta: 'textScore'}});
+        ).sort({ score: { $meta: 'textScore' } });
 
         return searchResults;
-
       } else {
-        const recipes = await Recipe.find().sort({ likes: 'desc', createdDate: 'desc'});
+        const recipes = await Recipe.find().sort({ likes: 'desc', createdDate: 'desc' });
 
         return recipes;
       }
-
     },
     getCurrentUser: async (root, args, { currentUser, User }) => {
       if (!currentUser) return null;
 
-      const user = await User.findOne({username: currentUser.username})
-        .populate({
-          path: 'favorites',
-          model: 'Recipe'
-        })
+      const user = await User.findOne({ username: currentUser.username }).populate({
+        path: 'favorites',
+        model: 'Recipe'
+      });
       return user;
     },
     getUserRecipes: async (root, { username }, { Recipe }) => {
       if (!username) return null;
 
-      const userRecipes = await Recipe.find({username})
+      const userRecipes = await Recipe.find({ username });
       return userRecipes;
     }
   },
   Mutation: {
     addRecipe: async (
       root,
-      {
-        name, category, description,
-        instructions, username
-      },
+      { name, category, description, instructions, username },
       { Recipe }
     ) => {
       const newRecipe = await new Recipe({
@@ -71,17 +64,15 @@ const resolvers = {
         description,
         instructions,
         username
-      })
-      .save();
+      }).save();
       return newRecipe;
     },
-    deleteUserRecipe: async (
-      root,
-      {
-        _id
-      },
-      { Recipe }
-    ) => {
+    likeRecipe: async (root, { _id, username }, { Recipe, User }) => {
+      await User.findOneAndUpdate({ username }, { $addToSet: { favorites: _id } });
+      const recipe = await Recipe.findOneAndUpdate({ _id }, { $inc: { likes: 1 } });
+      return recipe;
+    },
+    deleteUserRecipe: async (root, { _id }, { Recipe }) => {
       const recipe = await Recipe.findOneAndRemove({ _id });
       console.log(recipe);
       return recipe;
@@ -95,20 +86,18 @@ const resolvers = {
 
       if (!isValidPassword) throw new Error('Invalid user or password');
 
-      return { token: createToken(user, jwtOptions.secret, jwtOptions.exp) }
-
+      return { token: createToken(user, jwtOptions.secret, jwtOptions.exp) };
     },
     signupUser: async (root, { username, email, password }, { User }) => {
-        const user = await User.findOne({ username });
-        if (user) throw new Error('User already exists');
+      const user = await User.findOne({ username });
+      if (user) throw new Error('User already exists');
 
-        const newUser = await new User({
-          username,
-          email,
-          password
-        })
-        .save();
-        return { token: createToken(newUser, jwtOptions.secret, jwtOptions.exp) }
+      const newUser = await new User({
+        username,
+        email,
+        password
+      }).save();
+      return { token: createToken(newUser, jwtOptions.secret, jwtOptions.exp) };
     }
   }
 };

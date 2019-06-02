@@ -1,5 +1,8 @@
 import React from 'react';
+import { Mutation } from 'react-apollo';
+
 import withSession from '../../HOC/withSession';
+import { LIKE_RECIPE } from '../../../queries/mutations';
 
 class LikeRecipe extends React.Component {
   constructor(props) {
@@ -13,9 +16,23 @@ class LikeRecipe extends React.Component {
       username
     };
   }
+
+  handleLike = (likeRecipe) => {
+    likeRecipe().then(({ data }) => {
+      console.log(data);
+    });
+  };
+
   render() {
     const { username } = this.state;
-    return username && <button>Like</button>;
+    const { _id } = this.props;
+    return (
+      <Mutation mutation={LIKE_RECIPE} variables={{ _id, username }}>
+        {(likeRecipe) => {
+          return username && <button onClick={() => this.handleLike(likeRecipe)}>Like</button>;
+        }}
+      </Mutation>
+    );
   }
 }
 
