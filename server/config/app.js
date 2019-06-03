@@ -21,12 +21,12 @@ const schema = makeExecutableSchema({
 });
 
 // Create GraphQL application
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql'}));
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 const corsConfig = {
   origin: origin,
   credentials: true
-}
+};
 
 app.use(cors(corsConfig));
 

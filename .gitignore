@@ -67,3 +67,4 @@ typings/
 .serverless
 
 client/node_modules/
+build
