@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import config from './environment';
-
+console.log('========DBURI=====', config.db.uri);
 mongoose
   .connect(config.db.uri)
   .then(() => {

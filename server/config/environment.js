@@ -3,18 +3,22 @@
 const dotenv = require('dotenv');
 
 // Load environment variables from .env file
-const result = dotenv.config();
+const result = dotenv.config({ silent: true });
 
 if (result.error) {
   throw result.error;
 }
-
+console.log('====process.env.PORT=====', process.env.PORT);
+console.log('====process.env.DB_URI=====', process.env.DB_URI);
 const env = process.env.NODE_ENV || 'development';
 
 const configs = {
   production: {
     port: process.env.PORT || 7071,
     origin: process.env.ORIGIN || 'http://localhost:3001',
+    db: {
+      uri: process.env.DB_URI
+    },
     jwtOptions: {
       secret: process.env.SECRET || 'jdhfj4hr734wefhdcui49fwehc93824yhc9euic',
       exp: process.env.EXP || 36000
