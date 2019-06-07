@@ -11,4 +11,4 @@
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 * [MongoDB](https://www.mongodb.com/, https://www.mongodb.com/cloud/atlas )
 * [React](https://reactjs.org/docs/hooks-intro.html)
-* [Apollo] (https://www.apollographql.com)
+* [Apollo](https://www.apollographql.com)
