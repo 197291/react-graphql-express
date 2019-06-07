@@ -5,9 +5,6 @@ const dotenv = require('dotenv');
 // Load environment variables from .env file
 const result = dotenv.config({ silent: true });
 
-if (result.error) {
-  throw result.error;
-}
 console.log('====process.env.PORT=====', process.env.PORT);
 console.log('====process.env.DB_URI=====', process.env.DB_URI);
 const env = process.env.NODE_ENV || 'development';
