@@ -9,6 +9,6 @@
 * [express](http://expressjs.com)
 * [mongoose](https://mongoosejs.com/)
 * [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-* [MongoDB](https://www.mongodb.com/, https://www.mongodb.com/cloud/atlas )
+* [MongoDB](https://www.mongodb.com/)
 * [React](https://reactjs.org/docs/hooks-intro.html)
 * [Apollo](https://www.apollographql.com)
