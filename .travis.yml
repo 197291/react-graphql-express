@@ -1,0 +1,14 @@
+sudo: false
+
+language: node_js
+node_js:
+  - 11.10.0
+
+branches:
+  only:
+    - master
+deploy:
+  provider: heroku
+  app: react-apollo-recipes-197
+  api_key:
+    secure: be62d58c-ad96-4788-b32c-34ba13acae90
