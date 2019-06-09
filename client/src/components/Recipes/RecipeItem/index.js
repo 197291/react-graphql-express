@@ -37,7 +37,7 @@ const RecipeItem = ({ recipe, withLikes, username }) => (
       >
         <strong style={{ color: '#ffffff' }}>{recipe.category}</strong>
       </p>
-      {withLikes && <p>Likes: {recipe.likes}</p>}
+      {withLikes && <p className="likes">Likes: {recipe.likes}</p>}
       {username && (
         <Mutation
           mutation={DELETE_USER_RECIPE}

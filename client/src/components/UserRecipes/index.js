@@ -17,19 +17,21 @@ const UserRecipes = ({ session }) => {
         return (
           <>
             <h3>Your Recipes</h3>
-            {!data.getUserRecipes.length && (
-              <p>
-                <strong>You noy have added recipes yet</strong>
-              </p>
-            )}
-            {data.getUserRecipes.map((recipe) => (
-              <RecipeItem
-                username={session.getCurrentUser.username}
-                key={recipe._id}
-                recipe={recipe}
-                withLikes={true}
-              />
-            ))}
+            <div style={{ display: 'flex' }}>
+              {!data.getUserRecipes.length && (
+                <p>
+                  <strong>You noy have added recipes yet</strong>
+                </p>
+              )}
+              {data.getUserRecipes.map((recipe) => (
+                <RecipeItem
+                  username={session.getCurrentUser.username}
+                  key={recipe._id}
+                  recipe={recipe}
+                  withLikes={true}
+                />
+              ))}
+            </div>
           </>
         );
       }}

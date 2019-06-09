@@ -5,7 +5,7 @@ import UserRecipes from '../UserRecipes';
 import withAuth from '../HOC/withAuth';
 
 const Profile = ({ session }) => (
-  <div className="container">
+  <div className="container recipe-container">
     {session && <UserInfo session={session} />}
     {session && <UserRecipes session={session} />}
   </div>
