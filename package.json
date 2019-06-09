@@ -8,6 +8,7 @@
     "build": "mkdir build && babel -d ./build ./server -s",
     "start": "node ./build/index.js",
     "clean": "rm -rf build",
+    "test": "echo test",
     "prestart": "npm run clean && npm run build",
     "client": "cd client && npm start",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
