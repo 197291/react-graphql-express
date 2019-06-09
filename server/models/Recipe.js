@@ -7,25 +7,29 @@ const RecipeSchema = new Schema({
     type: String,
     required: true
   },
+  imageUrl: {
+    type: String,
+    required: true
+  },
   category: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   instructions: {
     type: String,
-    required: true,
+    required: true
   },
   createdDate: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   likes: {
     type: Number,
-    default: 0,
+    default: 0
   },
   username: {
     type: String
@@ -33,7 +37,7 @@ const RecipeSchema = new Schema({
 });
 
 RecipeSchema.index({
-  '$**': 'text',
+  '$**': 'text'
 });
 
 const Recipe = mongoose.model('Recipe', RecipeSchema);

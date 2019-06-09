@@ -14,6 +14,7 @@ class AddRecipe extends React.Component {
 
     this.state = {
       name: '',
+      imageUrl: '',
       category: 'Breakfast',
       instructions: '',
       description: '',
@@ -50,11 +51,11 @@ class AddRecipe extends React.Component {
   };
 
   render() {
-    const { name, category, description, instructions, username } = this.state;
+    const { name, category, description, instructions, username, imageUrl } = this.state;
     return (
       <Mutation
         mutation={ADD_RECIPE}
-        variables={{ name, category, description, instructions, username }}
+        variables={{ name, category, description, instructions, username, imageUrl }}
         update={this.updateCache}
       >
         {(addRecipe, { data, loading, error }) => {
@@ -71,6 +72,13 @@ class AddRecipe extends React.Component {
                   placeholder="Recipe Name"
                   onChange={this.handleChange}
                   value={name}
+                />
+                <input
+                  type="text"
+                  name="imageUrl"
+                  placeholder="Recipe Image"
+                  onChange={this.handleChange}
+                  value={imageUrl}
                 />
                 <select value={category} name="category" onChange={this.handleChange}>
                   <option value="Breakfast">Breakfast</option>

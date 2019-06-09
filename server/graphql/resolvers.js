@@ -55,11 +55,12 @@ const resolvers = {
   Mutation: {
     addRecipe: async (
       root,
-      { name, category, description, instructions, username },
+      { name, category, description, instructions, username, imageUrl },
       { Recipe }
     ) => {
       const newRecipe = await new Recipe({
         name,
+        imageUrl,
         category,
         description,
         instructions,

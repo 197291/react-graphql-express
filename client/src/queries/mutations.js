@@ -21,6 +21,7 @@ export const SIGNIN_USER = gql`
 export const ADD_RECIPE = gql`
   mutation(
     $name: String!
+    $imageUrl: String!
     $category: String!
     $description: String!
     $instructions: String!
@@ -28,6 +29,7 @@ export const ADD_RECIPE = gql`
   ) {
     addRecipe(
       name: $name
+      imageUrl: $imageUrl
       category: $category
       description: $description
       instructions: $instructions
