@@ -42,7 +42,7 @@ RecipeSchema.index({
 
 const Recipe = mongoose.model('Recipe', RecipeSchema);
 
-// PostSchema.statics = {
+// Recipe.statics = {
 //   searchPartial: function(q, callback) {
 //       return this.find({
 //           $or: [
