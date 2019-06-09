@@ -2,7 +2,8 @@ import ApolloClient from 'apollo-boost';
 import { getToken, removeToken } from '../helpers';
 
 const client = new ApolloClient({
-  uri: `http://localhost:4444/graphql`,
+  uri: `https://react-apollo-recipes-197.herokuapp.com/graphql`,
+  // uri: `http://localhost:4444/graphql`,
   fetchOptions: {
     credentials: 'include'
   },
