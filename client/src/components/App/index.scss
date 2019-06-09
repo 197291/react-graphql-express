@@ -1,3 +1,8 @@
 .App {
   text-align: center;
+  .recipe-container {
+    width: 100%;
+    padding: 0 20px;
+    max-width: 100%;
+  }
 }
