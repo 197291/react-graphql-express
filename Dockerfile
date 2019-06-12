@@ -22,5 +22,6 @@ ENV DB_URI mongodb+srv://197291:margo112358!@cluster0-dyoms.mongodb.net/test?ret
 ENV SECRET jsdfh4f2893du2390djeiodj1-iruhg8hvfoc3njk3j3=jke`
 ENV API_PORT_DEVELOPMENT 4444
 ENV PORT 80
+ENV NODE_ENV production
 # Run index.js when the container launches
 CMD ["node", "build/index.js"]

@@ -9,7 +9,7 @@ const env = process.env.NODE_ENV || 'development';
 
 const configs = {
   production: {
-    port: process.env.PORT || 7071,
+    port: process.env.API_PORT_DEVELOPMENT || 7071,
     origin: process.env.ORIGIN || 'http://localhost:3001',
     db: {
       uri: process.env.DB_URI
