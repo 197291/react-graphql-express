@@ -29,7 +29,7 @@
     "@babel/preset-env": "^7.3.4",
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/runtime": "^7.4.2",
-    "apollo-server-express": "^1.4.0",
+    "apollo-server-express": "^2.14.2",
     "babel-plugin-import-graphql": "^2.7.0",
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
